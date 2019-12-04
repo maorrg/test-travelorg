@@ -272,10 +272,13 @@ def get_experiencias_viajero(id_viajero):
 @app.route('/authenticate', methods = ['POST'])
 def authenticate():
     #Get data form request
-    time.sleep(3)
-    message = json.loads(request.data)
-    username = message['username']
-    password = message['password']
+    #time.sleep(3)
+    #message = json.loads(request.data)
+    #username = message['username']
+    #password = message['password']
+
+    username = request.form['usuario']
+    password = request.form['contrasena']
 
     # Look in database
     db_session = db.getSession(engine)

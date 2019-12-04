@@ -34,7 +34,7 @@ def login():
     ).first()
 
     if viajero != None:
-        #session['usuario'] = usuario
+        session['usuario'] = usuario
         session['logged_user'] = viajero.id
         return render_template('calendar.html')
     else:

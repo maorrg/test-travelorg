@@ -1,8 +1,10 @@
+from os import environ
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import DeclarativeMeta
 import json
+from flask_session import Session
 
 class Manager:
     Base = declarative_base()

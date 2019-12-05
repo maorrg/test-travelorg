@@ -1,4 +1,4 @@
-from flask import Flask,render_template, request, session, Response, redirect
+from flask import Flask,render_template, request, session, Response, redirect, session
 from database import connector
 from model import entities
 import datetime
@@ -15,6 +15,7 @@ sess = Session()
 
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
 
 
 @app.route('/')
@@ -319,10 +320,6 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.secret_key = "super secret"
-    app.config['SESSION_TYPE'] = 'filesystem'
-    SESSION_TYPE = environ.get('SESSION_TYPE=redis')
-    SESSION_REDIS = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
 
-    sess.init_app(app)
+
     app.run(debug=True,port=8000, threaded=True, host=('127.0.0.1'))

@@ -4,11 +4,18 @@ from model import entities
 import datetime
 import json
 import time
+from flask_session import Session
+from os import environ
+import os
+
 
 db = connector.Manager()
 engine = db.createEngine()
+sess = Session()
+
 
 app = Flask(__name__)
+
 
 @app.route('/')
 def index():
@@ -311,7 +318,11 @@ def logout():
     return render_template('index.html')
 
 
-
 if __name__ == '__main__':
-    app.secret_key = ".."
+    app.secret_key = "super secret"
+    app.config['SESSION_TYPE'] = 'filesystem'
+    SESSION_TYPE = environ.get('SESSION_TYPE=redis')
+    SESSION_REDIS = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
+
+    sess.init_app(app)
     app.run(debug=True,port=8000, threaded=True, host=('127.0.0.1'))
